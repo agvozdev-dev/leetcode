@@ -1,7 +1,8 @@
 # Easy
 ## [1. Two Sum](https://leetcode.com/problems/two-sum/description/)
 
-`public int[] TwoSum(int[] nums, int target) 
+```cs
+public int[] TwoSum(int[] nums, int target) 
 {
     var dictionary = Enumerable.Range(0, nums.Length).ToDictionary(i => nums[i]);
 
@@ -15,4 +16,5 @@
     }
 
      return new int[0];
-}`
+}
+```
