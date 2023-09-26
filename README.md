@@ -1,1 +1,1 @@
-Решение задач с leetcode.com
+# Решение задач с https://leetcode.com
