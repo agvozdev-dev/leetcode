@@ -21,3 +21,22 @@ public int[] TwoSum(int[] nums, int target)
     return new int[0];
 }
 ```
+
+## [9. Palindrome Number](https://leetcode.com/problems/palindrome-number/description/)
+
+```cs
+public bool IsPalindrome(int number) 
+{
+    var temp = number;
+
+    var result = 0;
+    while(temp > 0)
+    {
+        result = result * 10 + temp % 10;
+
+        temp = (int)(temp / 10);
+    }
+
+    return number == result;
+}
+```
