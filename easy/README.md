@@ -72,7 +72,7 @@ public int NumIdenticalPairs(int[] nums)
 
 ## [26. Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/)
 
-```CS
+```cs
 public int RemoveDuplicates(int[] nums) 
 {
     int k = 1;
