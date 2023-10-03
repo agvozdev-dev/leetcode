@@ -40,3 +40,32 @@ public bool IsPalindrome(int number)
     return number == result;
 }
 ```
+
+## [91512. Number of Good Pairs](https://leetcode.com/problems/number-of-good-pairs/description/)
+
+```cs
+// Сумма ряда 1+2+3+4+5... рассчитывается по формуле (n*n + n) / 2
+public int NumIdenticalPairs(int[] nums) 
+{
+    int goodPairsCount = 0;
+    var dict = new Dictionary<int, int>();
+
+    for(var i = 0; i < nums.Length; i++)
+    {
+        var find = dict.TryGetValue(nums[i], out var numberCount);
+        
+        goodPairsCount += numberCount;
+
+        if(find)
+        {
+            dict[nums[i]] = numberCount + 1;
+        }
+        else
+        {
+            dict.Add(nums[i], 1);
+        }
+    }
+
+    return goodPairsCount;
+}
+```
