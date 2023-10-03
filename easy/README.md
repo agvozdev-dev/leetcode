@@ -41,7 +41,7 @@ public bool IsPalindrome(int number)
 }
 ```
 
-## [91512. Number of Good Pairs](https://leetcode.com/problems/number-of-good-pairs/description/)
+## [1512. Number of Good Pairs](https://leetcode.com/problems/number-of-good-pairs/description/)
 
 ```cs
 // Сумма ряда 1+2+3+4+5... рассчитывается по формуле (n*n + n) / 2
@@ -67,5 +67,27 @@ public int NumIdenticalPairs(int[] nums)
     }
 
     return goodPairsCount;
+}
+```
+
+## [26. Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/)
+
+```CS
+public int RemoveDuplicates(int[] nums) 
+{
+    int k = 1;
+    var min = nums[0];
+
+    for(int i = 1; i < nums.Length; i++)
+    {
+        if(min != nums[i])
+        {
+            nums[k++] = nums[i];
+        }
+
+        min = nums[i];
+    }
+
+    return k;
 }
 ```
