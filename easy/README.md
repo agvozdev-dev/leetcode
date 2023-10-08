@@ -92,7 +92,7 @@ public int RemoveDuplicates(int[] nums)
 }
 ```
 
-##[27. Remove Element](https://leetcode.com/problems/remove-element/description/)
+## [27. Remove Element](https://leetcode.com/problems/remove-element/description/)
 
 ```cs
 public int RemoveElement(int[] nums, int val) 
