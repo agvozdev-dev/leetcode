@@ -110,3 +110,33 @@ public int RemoveElement(int[] nums, int val)
     return result;
 }
 ```
+
+## [28. Find the Index of the First Occurrence in a String](https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/description/)
+
+### Решение 1. Прямой поиск (O(M*N))
+
+```cs
+public int StrStr(string haystack, string needle) 
+{
+    for(int i = 0; i < haystack.Length - needle.Length + 1; i++)
+    {
+        bool find = true;
+        for(int j = 0; j < needle.Length; j++)
+        {
+            if(haystack[i+j] != needle[j])
+            {
+                find = false;
+                break;
+            }
+        }
+
+        if(find)
+        {
+            return i;
+        }
+    }
+    
+    return -1;
+}
+```
+
