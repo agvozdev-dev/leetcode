@@ -140,7 +140,7 @@ public int StrStr(string haystack, string needle)
 }
 ```
 
-## [125. Find the Index of the First Occurrence in a String](https://leetcode.com/problems/valid-palindrome/description/)
+## [125. Valid Palindrome](https://leetcode.com/problems/valid-palindrome/description/)
 
 ### Complexity: Time - O(n); Space - O(n)
 
