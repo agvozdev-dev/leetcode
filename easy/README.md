@@ -139,3 +139,37 @@ public int StrStr(string haystack, string needle)
     return -1;
 }
 ```
+
+## [125. Find the Index of the First Occurrence in a String](https://leetcode.com/problems/valid-palindrome/description/)
+
+### Complexity: Time - O(n); Space - O(n)
+
+```cs
+public bool IsPalindrome(string s) 
+{
+    var left = 0;
+    var right = s.Length - 1;
+
+    while(left <= right)
+    {
+        if(!char.IsLetterOrDigit(s[left]))
+        {
+            left++;
+            continue;
+        }
+
+        if(!char.IsLetterOrDigit(s[right]))
+        {
+            right--;
+            continue;
+        }
+
+        if(Char.ToLower(s[left++]) != Char.ToLower(s[right--]))
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+```
