@@ -179,36 +179,64 @@ public bool IsPalindrome(string s)
 ### Complexity: Time - O(n); Space - O(1)
 ```cs
 public bool IsValid(string s) 
+{
+    if(s.Length % 2 != 0)
     {
-        if(s.Length % 2 != 0)
-        {
-            return false;
-        }
-
-        var bracketsMap = new Dictionary<char, char>
-        {
-            {')', '('},
-            {'}', '{'},
-            {']', '['},
-        };
-        
-        var openBrackets = new Stack<char>();
-        foreach(var current in s)
-        {
-            if(!bracketsMap.TryGetValue(current, out var openBracket))
-            {
-                openBrackets.Push(current);
-                continue;
-            }
-
-            if(openBrackets.TryPop(out var topStackBracket) && openBracket == topStackBracket)
-            {
-                continue;
-            }
-
-            return false;
-        }
-
-        return openBrackets.Count == 0;
+        return false;
     }
+
+    var bracketsMap = new Dictionary<char, char>
+    {
+        {')', '('},
+        {'}', '{'},
+        {']', '['},
+    };
+    
+    var openBrackets = new Stack<char>();
+    foreach(var current in s)
+    {
+        if(!bracketsMap.TryGetValue(current, out var openBracket))
+        {
+            openBrackets.Push(current);
+            continue;
+        }
+
+        if(openBrackets.TryPop(out var topStackBracket) && openBracket == topStackBracket)
+        {
+            continue;
+        }
+
+        return false;
+    }
+
+    return openBrackets.Count == 0;
+}
+```
+
+## [2824. Count Pairs Whose Sum is Less than Target](https://leetcode.com/problems/count-pairs-whose-sum-is-less-than-target/description/)
+
+### Complexity: Time - O(NLog(N)) + O(n); Space - O(1)
+```cs
+public int CountPairs(IList<int> nums, int target) 
+{
+    nums = nums.OrderBy(x => x).ToList();
+
+    var count = 0;
+    for(int left = 0, right = nums.Count - 1; left <= right;)
+    {
+        var sum = nums[left] + nums[right];
+        if(sum >= target)
+        {
+            right--;
+        }
+        else
+        {
+            // т.к. массив отсортирован, числа перед right <= right, а значит сумма не будет превышать пороговое значение
+            count += right - left;
+            left++;
+        }
+    }
+
+    return count;
+}
 ```
