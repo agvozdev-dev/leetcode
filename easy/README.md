@@ -173,3 +173,42 @@ public bool IsPalindrome(string s)
     return true;
 }
 ```
+
+## [20. Valid Parentheses](https://leetcode.com/problems/valid-parentheses/description/?source=submission-ac)
+
+### Complexity: Time - O(n); Space - O(1)
+```cs
+public bool IsValid(string s) 
+    {
+        if(s.Length % 2 != 0)
+        {
+            return false;
+        }
+
+        var bracketsMap = new Dictionary<char, char>
+        {
+            {')', '('},
+            {'}', '{'},
+            {']', '['},
+        };
+        
+        var openBrackets = new Stack<char>();
+        foreach(var current in s)
+        {
+            if(!bracketsMap.TryGetValue(current, out var openBracket))
+            {
+                openBrackets.Push(current);
+                continue;
+            }
+
+            if(openBrackets.TryPop(out var topStackBracket) && openBracket == topStackBracket)
+            {
+                continue;
+            }
+
+            return false;
+        }
+
+        return openBrackets.Count == 0;
+    }
+```
