@@ -214,8 +214,8 @@ public bool IsValid(string s)
 ```
 
 ## [2824. Count Pairs Whose Sum is Less than Target](https://leetcode.com/problems/count-pairs-whose-sum-is-less-than-target/description/)
-
-### Complexity: Time - O(NLog(N)) + O(n); Space - O(1)
+##### Topics: Array | Two Pointers | Binary Search | Sorting
+##### Complexity: Time - O(NLog(N)) + O(n); Space - O(1)
 ```cs
 public int CountPairs(IList<int> nums, int target) 
 {
