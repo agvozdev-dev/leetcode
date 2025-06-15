@@ -1,0 +1,64 @@
+# Medium
+
+## [19. Remove Nth Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/)
+
+### Complexity: Time - O(n); Space - O(1)
+
+#### Решение 1. Dummy node + fast & slow pointers
+
+```cs
+public ListNode RemoveNthFromEnd(ListNode head, int n) 
+{
+    var dummy = new ListNode(0, head);
+
+    var fast = dummy;
+    for(var i = 0; i < n + 1; i++) // n + 1, т.к. есть dummy node
+    {
+        fast = fast.next;
+    }
+
+    var slow = dummy;
+    while(fast != null)
+    {
+        fast = fast.next;
+        slow = slow.next;
+    }
+
+    slow.next = slow.next.next;
+
+    return dummy.next;
+}
+```
+
+Совпали названия, это не алгоритм быстрого и медленного указателя.
+
+#### Решение 2. Dummy node
+```cs
+public ListNode RemoveNthFromEnd(ListNode head, int n) 
+{
+    var dummy = new ListNode(0, head);
+
+    var curr = dummy;
+    var length = 0;
+
+    while(curr != null)
+    {
+        length++;
+        curr = curr.next;
+    }
+
+    curr = dummy;
+    for(int i = 0; i < length - n - 1; i++)
+    {
+        curr = curr.next;
+    }
+
+    curr.next = curr.next.next;
+
+    return dummy.next;
+}
+```
+
+
+
+
