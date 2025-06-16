@@ -66,6 +66,33 @@ public ListNode RemoveNthFromEnd(ListNode head, int n)
 }
 ```
 
+## [206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/description/)
 
+### Complexity: Time - O(n); Space - O(1)
 
+#### Решение 1. Итеративное
 
+У нас нет указателя на предыдущий элемент. Значит,нам нужно его где-то сохранять заранее. Также на нужно сохранять указатель на следующий элемент, т.к. связь текущего со следующим мы разорвем. 
+
+1. Заводим указатель на предыдущий элемент - prev.
+2. Заводим указатель на следующий элемент - next.
+
+В конце каждой итерации цикла prev указывает на предыдущий элемент, а curr и next на один и тот же - текущий. 
+
+```cs
+public ListNode ReverseList(ListNode head) 
+{
+    var curr = head;
+    ListNode prev = null;
+
+    while(curr != null)
+    {
+        var next = curr.next;
+        curr.next = prev;
+        prev = curr;
+        curr = next;
+    }
+
+    return prev;
+}
+```
