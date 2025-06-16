@@ -96,3 +96,30 @@ public ListNode ReverseList(ListNode head)
     return prev;
 }
 ```
+
+## [876. Middle of the Linked List](https://leetcode.com/problems/middle-of-the-linked-list/description/)
+
+### Complexity: Time - O(n); Space - O(1)
+
+#### Решение 1. Быстрый и медленный указатели
+
+1. Заводим два указателя - fast и slow, которые указывают на head.
+2. Fast движется в два раза быстрее.
+3. Как только fast дошел до конца, slow окажется на середине связного списка.
+
+```cs
+public ListNode MiddleNode(ListNode head) 
+{
+    var fast = head;
+    var slow = head;
+
+    while(fast != null && fast.next != null)
+    {
+        // slow сдвигаем на одну позицию, а fast - на две.
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+
+    return slow;
+}
+```
