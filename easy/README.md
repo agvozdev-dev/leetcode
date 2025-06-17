@@ -298,3 +298,67 @@ public ListNode MiddleNode(ListNode head)
     return slow;
 }
 ```
+
+## [234. Palindrome Linked List](https://leetcode.com/problems/palindrome-linked-list/description/)
+
+### Complexity: Time - O(n); Space - O(1)
+
+#### Решение 1. Реверс второй поливины списка
+
+1. Сначала находим середину списка с помощью быстрого и медленного указателей.
+2. Затем делаем реверс второй половины связного списка.
+3. Сравниваем попароно значения.
+
+ВАЖНО: могут попросить вернуть список в исходное состояние.
+
+```cs
+public bool IsPalindrome(ListNode head) 
+{
+    // находим середину связного списка
+    var slow = head;
+    var fast = head;
+
+    while(fast != null && fast.next != null)
+    {
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+
+    // делаем реверс второй половины связного списка
+    ListNode prev = null;
+
+    var curr = slow;
+    while(curr != null)
+    {
+        var next = curr.next;
+        curr.next = prev;
+        prev = curr;
+        curr = next;
+    }
+
+    /*
+    *  Важно понимать как будет выглядеть список после манипуляций с реверсом
+    *
+    *       p1        p2
+    *  in:  1 -> 2 -> 3
+    *  out: 1 -> 2 <- 3
+    *           /
+    *    Null <|    
+    */
+
+    // Сравниваем и сдвигаем два указателя, пока их значения равны 
+    curr = head;
+    while(prev != null)
+    {
+        if(curr.val != prev.val)
+        {
+            return false;
+        }
+
+        curr = curr.next;
+        prev = prev.next;
+    }
+
+    return true;
+}
+```
