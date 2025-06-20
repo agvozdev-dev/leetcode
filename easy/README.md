@@ -362,3 +362,56 @@ public bool IsPalindrome(ListNode head)
     return true;
 }
 ```
+
+## [21. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/description/)
+
+### Complexity: Time - O(m + n); Space - O(1)
+где m и n - длины двух списков
+
+#### Решение 1. Dummy node
+1. При инициализации структура такая: 
+
+```
+dummy   → [-1] → null
+prev    → [-1] → null
+```
+2. После сравнения элементов сдвигаем указатели:
+
+prev.next = list1;  // [-1].next = [1]
+
+```
+dummy   → [-1] → [1] → null
+prev    → [-1] → [1] → null
+```
+
+Как видим, у dummy указатель тоже поменялся, т.к. dummy и prev указывают на один и тот же объект.
+
+```cs
+public ListNode MergeTwoLists(ListNode list1, ListNode list2) 
+{
+    // фиктивная вершина, будет указывать на первую вершину list1 или list2,
+    // в зависимости от того, чье значение окажется меньше.
+    var dummy = new ListNode(-1);
+    
+    var prev = dummy;
+    while(list1 != null && list2 != null)
+    {
+        if(list1.val <= list2.val)
+        {
+            prev.next = list1;
+            list1 = list1.next;
+        }
+        else
+        {
+            prev.next = list2;
+            list2 = list2.next;
+        }
+
+        prev = prev.next;
+    }
+
+    prev.next = list1 ?? list2;
+
+    return dummy.next;
+}
+```
