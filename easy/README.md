@@ -423,7 +423,6 @@ public ListNode MergeTwoLists(ListNode list1, ListNode list2)
 
 #### Решение 1. На основе длин двух списков
 
-
 ```cs
 public ListNode GetIntersectionNode(ListNode headA, ListNode headB) 
 {
@@ -470,5 +469,40 @@ private int GetLength(ListNode head)
     }
 
     return length;
+}
+```
+
+## [141. Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/description/)
+
+### Complexity: Time - O(N); Space - O(1)
+
+#### Решение 1. Алгоритм Флойда
+
+```cs
+public class Solution 
+{
+    public bool HasCycle(ListNode head) 
+    {
+        if(head == null)
+        {
+            return false;
+        }
+        
+        var slow = head;
+        var fast = head;
+        
+        while(fast != null && fast.next != null)
+        {
+            slow = slow.next;
+            fast = fast.next.next;
+            
+            if(slow == fast)
+            {
+                return true;
+            }
+        }
+        
+        return false;
+    }
 }
 ```
