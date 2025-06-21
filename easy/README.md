@@ -415,3 +415,60 @@ public ListNode MergeTwoLists(ListNode list1, ListNode list2)
     return dummy.next;
 }
 ```
+
+## [160. Intersection of Two Linked List](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
+
+### Complexity: Time - O(m + n); Space - O(1)
+где m и n - длины двух списков
+
+#### Решение 1. На основе длин двух списков
+
+
+```cs
+public ListNode GetIntersectionNode(ListNode headA, ListNode headB) 
+{
+    var lengthA = GetLength(headA);
+    var lengthB = GetLength(headB);
+
+    ListNode lA = lengthA <= lengthB ? headA : Rewind(headA, lengthA - lengthB);
+    ListNode lB = lengthB <= lengthA ? headB : Rewind(headB, lengthB - lengthA);
+
+    while(lA != null && lB != null)
+    {
+        if(lA == lB)
+        {
+            return lA;
+        }
+
+        lA = lA.next;
+        lB = lB.next;
+    }
+
+    return null;
+}
+
+private ListNode Rewind(ListNode head, int count)
+{
+    var curr = head;
+    for(int i = 0; i < count; i++)
+    {
+        curr = curr.next;
+    }
+
+    return curr;
+}
+
+private int GetLength(ListNode head)
+{
+    var length = 0;
+
+    var curr = head;
+    while(curr != null)
+    {
+        length++;
+        curr = curr.next;
+    }
+
+    return length;
+}
+```
