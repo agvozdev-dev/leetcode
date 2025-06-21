@@ -3,56 +3,57 @@
 ### Complexity: Time - O(kN); Space - O(1)
 где k - число связных списков
 
-#### Решение 1. Dummy node + fast & slow pointers
+#### Решение 1. Dummy node 
+
+Находим индекс связного списка, который имеет на текущий момент минимальное значение. Если индекс равен -1, то это означает что мы обработали все элементы во всех связных списках и цикл нужно прерывать. 
+Dummy node заводим потому что мы не знаем элемент какого из списков окажется минимальным на самой первой итерации.  
 
 ```cs
-public void ReorderList(ListNode head) 
+public class Solution 
 {
-    var middle = GetMiddleNode(head);
-
-    var l1 = head;
-    var l2 = GetReversedSublistHead(middle);
-
-    while(l2.next != null)
+    public ListNode MergeKLists(ListNode[] lists) 
     {
-        var temp = l1.next;
-        l1.next = l2;
-        l1 = temp;
-
-        temp = l2.next;
-        l2.next = l1;
-        l2 = temp;
-    }
-}
-
-private ListNode GetMiddleNode(ListNode head)
-{
-    var fast = head;
-    var slow = head;
-
-    while(fast != null && fast.next != null)
-    {
-        slow = slow.next;
-        fast = fast.next.next;
-    }
-
-    return slow;
-}
-
-private ListNode GetReversedSublistHead(ListNode middle)
-{
-    ListNode prev = null;
-    
-    var curr = middle;
-    while(curr != null)
-    {
-        var next = curr.next;
+        var dummy = new ListNode(-1000000);
         
-        curr.next = prev;
-        prev = curr;
-        curr = next;
+        var curr = dummy;
+        while(true)
+        {
+            var minIndex = GetMinNodeListIndex(lists);
+            if(minIndex == -1)
+            {
+                break;
+            }
+            
+            curr.next = lists[minIndex];
+            lists[minIndex] = lists[minIndex].next;
+            
+            curr = curr.next;
+        }
+        
+        return dummy.next;
     }
-
-    return prev;
+    
+    private int GetMinNodeListIndex(ListNode[] lists)
+    {
+        int minValue = 1000000;
+        int minIndex = -1;
+        
+        for(var i = 0; i < lists.Length; i++)
+        {
+            var list = lists[i];
+            if(list == null)
+            {
+                continue;
+            }
+            
+            if(list.val < minValue)
+            {
+                minValue = list.val;
+                minIndex = i;
+            }
+        }
+        
+        return minIndex;
+    }
 }
 ```
