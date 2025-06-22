@@ -231,12 +231,15 @@ public class Solution
 {
     public ListNode DetectCycle(ListNode head)
     {
+        // Получить указатель на вершину,где встретились slow и fast
         var meet = GetMeetNode(head);
         if(meet == null)
         {
             return null;
         }
-        
+
+        // Идем от начала связного списка до тех пор, пока не встретятся указатели.
+        // Т.к. мы передвигаемся только на 1 шаг вперед за итерацию, указатели встретятся в вершине, где начинается цикл.
         var curr = head;
         while(curr != meet)
         {
