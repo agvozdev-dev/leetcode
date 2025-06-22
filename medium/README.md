@@ -219,3 +219,51 @@ public class MyLinkedList
     }
 }
 ```
+
+## [142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/description/)
+
+### Complexity: Time - O(n); Space - O(1)
+
+#### Решение 1. Алгоритм Флойда и разница между позициями указателей
+
+```cs
+public class Solution 
+{
+    public ListNode DetectCycle(ListNode head)
+    {
+        var meet = GetMeetNode(head);
+        if(meet == null)
+        {
+            return null;
+        }
+        
+        var curr = head;
+        while(curr != meet)
+        {
+            curr = curr.next;
+            meet = meet.next;
+        }
+        
+        return curr;
+    }
+    
+    private ListNode GetMeetNode(ListNode head)
+    {
+        var slow = head;
+        var fast = head;
+        
+        while(fast != null && fast.next != null)
+        {
+            slow = slow.next;
+            fast = fast.next.next;
+            
+            if(slow == fast)
+            {
+                return slow;
+            }
+        }
+        
+        return null;
+    }
+}
+```
