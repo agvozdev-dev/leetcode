@@ -482,12 +482,7 @@ private int GetLength(ListNode head)
 public class Solution 
 {
     public bool HasCycle(ListNode head) 
-    {
-        if(head == null)
-        {
-            return false;
-        }
-        
+    {       
         var slow = head;
         var fast = head;
         
