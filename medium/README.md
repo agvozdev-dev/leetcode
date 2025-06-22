@@ -123,3 +123,99 @@ private ListNode GetReversedSublistHead(ListNode middle)
     return prev;
 }
 ```
+
+## [707. Design Linked List](https://leetcode.com/problems/design-linked-list/description/)
+
+#### Решение 1. Использовал Dummy node для облегчения обработки случаев, когда нужно обрабатывать первую вершину
+
+```cs
+public class MyLinkedList 
+{
+    private int length;
+    
+    private ListNode dummy;
+    
+    public MyLinkedList() 
+    {
+        length = 1;
+        dummy = new ListNode(-1);
+    }
+    
+    public int Get(int index) 
+    {
+        if(IsIndexInvalid(index))
+        {
+            return -1;
+        }
+        
+        var curr = dummy;
+        for(var i = 0; i < index + 1; i++)
+        {
+            curr = curr.next;
+        }
+        
+        return curr.val;
+    }
+    
+    public void AddAtHead(int val) 
+    {
+        dummy.next = new ListNode(val, dummy.next);
+        
+        length++;
+    }
+    
+    public void AddAtTail(int val) 
+    {
+        var curr = dummy;
+        while(curr.next != null)
+        {
+            curr = curr.next;
+        }
+        
+        curr.next = new ListNode(val);
+        
+        length++;
+    }
+    
+    public void AddAtIndex(int index, int val) 
+    {
+        if(index < 0 || index > length - 1)
+        {
+            return;
+        }
+        
+        var prev = dummy;
+        for(int i = 0; i < index; i++)
+        {
+            prev = prev.next;
+        }
+        
+        prev.next = new ListNode(val, prev.next);
+        
+        length++;
+    }
+    
+    public void DeleteAtIndex(int index) 
+    {
+        if(IsIndexInvalid(index))
+        {
+            return;
+        }
+        
+        var prev = dummy;
+        for(int i = 0; i < index; i++)
+        {
+            prev = prev.next;
+        }
+            
+        prev.next = prev.next.next;
+        
+        length--;
+    }
+    
+    private bool IsIndexInvalid(int index)
+    {
+        return index < 0 || index >= length - 1;
+    }
+}
+```
